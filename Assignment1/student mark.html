@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Marks System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Student Marks System</h2>
+        <p>A simple interactive demo to practice JavaScript arrays: add/remove/sort/calc avg/find max.</p>
+        <div id="stats"></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody id="studentsTable"></tbody>
+        </table>
+        <div class="controls">
+            <button onclick="showHighest()">Show Highest</button>
+            <button onclick="showAverage()">Show Average</button>
+            <button onclick="sortByMarks()">Sort by Marks ↓</button>
+            <button onclick="resetSample()">Reset Sample</button>
+            <button onclick="removeLast()">Remove Last</button>
+        </div>
+        <div class="add-student">
+            <input type="text" id="studentName" placeholder="Student name">
+            <input type="number" id="studentMarks" placeholder="Marks (0-100)" min="0" max="100">
+            <button onclick="addStudent()">Add Student</button>
+        </div>
+        <div id="message"></div>
+    </div>
+    <script src="mark.js"></script>
+</body>
+</html>
