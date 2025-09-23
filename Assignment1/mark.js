@@ -1,10 +1,10 @@
 let students = [
-    { name: "Divya", marks: 98 },
-    { name: "Karan", marks: 95 },
-    { name: "Priya", marks: 92 },
-    { name: "Sneha", marks: 88 },
-    { name: "Amit", marks: 85 },
-    { name: "Rahul", marks: 76 }
+    //  { name: "Divya", marks: 98,subject:"Maths" },
+    //  { name: "Karan", marks: 95,Subject:"Science" },
+    //  { name: "Priya", marks: 92,Subject:"English" },
+    // { name: "Sneha", marks: 88,Subject:"History" },
+    // { name: "Amit", marks: 85,Subject:"Geography" },
+    // { name: "Rahul", marks: 76,Subject:"Computer science"},
 ];
 
 function renderTable() {
@@ -14,6 +14,7 @@ function renderTable() {
         const row = `<tr>
             <td>${s.name}</td>
             <td>${s.marks}</td>
+            <td>${s.Subject}</td>
         </tr>`;
         table.innerHTML += row;
     });
@@ -39,12 +40,12 @@ function sortByMarks() {
 
 function resetSample() {
     students = [
-        { name: "Divya", marks: 98 },
-        { name: "Karan", marks: 95 },
-        { name: "Priya", marks: 92 },
-        { name: "Sneha", marks: 88 },
-        { name: "Amit", marks: 85 },
-        { name: "Rahul", marks: 76 }
+        //  { name: "Divya", marks: 98,Subject:"Maths" },
+        // { name: "Karan", marks: 95,Subject:"Science" },
+        //  { name: "Priya", marks: 92,Subject:"English" },
+        //  { name: "Sneha", marks: 88,Subject:"History" },
+        //  { name: "Amit", marks: 85,Subject:"Geography" },
+        // { name: "Rahul", marks: 76,Subject:"Computer science" },
     ];
     renderTable();
     document.getElementById('message').textContent = "";
@@ -59,12 +60,14 @@ function removeLast() {
 function addStudent() {
     const name = document.getElementById('studentName').value.trim();
     const marks = parseInt(document.getElementById('studentMarks').value, 10);
+    const Subject=document.getElementById('studentsubject').value.trim();
     if (name && !isNaN(marks) && marks >= 0 && marks <= 100) {
-        students.push({ name, marks });
+        students.push({ name, marks, Subject });
         renderTable();
         document.getElementById('studentName').value = "";
         document.getElementById('studentMarks').value = "";
-    document.getElementById('message').textContent = `Added: ${name} (${marks})`;
+        document.getElementById('studentsubject').value = "";
+    document.getElementById('message').textContent = `Added: ${name} (${marks})(${Subject})`;
     } else {
         document.getElementById('message').textContent = "Enter a valid name and marks (0-100).";
     }

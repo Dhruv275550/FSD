@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 20px;
+    }
+    h2 {
+      text-align: center;
+    }
+    form {
+      max-width: 400px;
+      margin: auto;
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 10px;
+      background: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    table {
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      background: #fff;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+    tfoot td {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Expense Tracker</h2>
+
+  <form id="expenseForm">
+    <label>Expense Name</label>
+    <input type="text" id="name" placeholder="e.g. Groceries" required>
+
+    <label>Amount (£)</label>
+    <input type="number" id="amount" placeholder="e.g. 50" required>
+
+    <label>Description</label>
+    <textarea id="description" placeholder="e.g. Fruits, milk, and vegetables"></textarea>
+
+    <label>Date</label>
+    <input type="date" id="date" required>
+
+    <button type="submit">Add Expense</button>
+  </form>
+
+  <table id="expenseTable">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Amount (£)</th>
+        <th>Description</th>
+        <th>Date</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5">Total: £<span id="total">0</span></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <script>
+    const expenseForm = document.getElementById('expenseForm');
+    const expenseTableBody = document.querySelector('#expenseTable tbody');
+    const totalEl = document.getElementById('total');
+    let total = 0;
+
+    expenseForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const amount = parseFloat(document.getElementById('amount').value);
+      const description = document.getElementById('description').value;
+      const date = document.getElementById('date').value;
+
+      // Add row
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${name}</td>
+        <td>£${amount.toFixed(2)}</td>
+        <td>${description}</td>
+        <td>${date}</td>
+        <td><button onclick="deleteRow(this, ${amount})">Delete</button></td>
+      `;
+      expenseTableBody.appendChild(row);
+
+      // Update total
+      total += amount;
+      totalEl.textContent = total.toFixed(2);
+
+      // Reset form
+      expenseForm.reset();
+    });
+
+    function deleteRow(button, amount) {
+      const row = button.parentElement.parentElement;
+      row.remove();
+      total -= amount;
+      totalEl.textContent = total.toFixed(2);
+    }
+  </script>
+
+</body>
+</html>
